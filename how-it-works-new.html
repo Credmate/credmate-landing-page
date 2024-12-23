@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How It Works - CredMate</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #A2195E;
+            --primary-light: #C73B82;
+            --primary-lighter: #E85EA5;
+            --primary-dark: #7A1246;
+            --primary-darker: #52102F;
+            --white: #ffffff;
+            --gray-light: #f8f9fa;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background: var(--white);
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            position: relative;
+            height: 50vh;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+            z-index: -1;
+        }
+
+        .hero-content {
+            text-align: center;
+            color: var(--white);
+            padding: 20px;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease forwards 0.2s;
+        }
+
+        /* Tabs */
+        .features-tabs {
+            position: relative;
+            margin-top: -50px;
+            padding: 0 20px;
+        }
+
+        .tab-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .tab {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 20px;
+            min-width: 250px;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tab::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            opacity: 0;
+            transition: var(--transition);
+            z-index: 1;
+        }
+
+        .tab.active::before {
+            opacity: 1;
+        }
+
+        .tab-icon {
+            position: relative;
+            z-index: 2;
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: var(--primary);
+            transition: var(--transition);
+        }
+
+        .tab.active .tab-icon {
+            color: var(--white);
+            transform: scale(1.2);
+        }
+
+        .tab-label {
+            position: relative;
+            z-index: 2;
+        }
+
+        .tab-label h3 {
+            margin: 0 0 5px;
+            font-size: 1.2rem;
+            color: var(--primary-dark);
+            transition: var(--transition);
+        }
+
+        .tab-label p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: #666;
+            transition: var(--transition);
+        }
+
+        .tab.active .tab-label h3,
+        .tab.active .tab-label p {
+            color: var(--white);
+        }
+
+        .tab:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Feature Panels */
+        .features-content {
+            padding: 60px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-panel {
+            display: none;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .feature-panel.active {
+            display: block;
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        /* Phone Container */
+        .phone-container {
+            position: relative;
+            width: 300px;
+            margin: 0 auto;
+        }
+
+        .phone-frame {
+            background: var(--white);
+            border-radius: 30px;
+            padding: 15px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .screen-content {
+            width: 100%;
+            border-radius: 15px;
+        }
+
+        .notification-popup {
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            background: var(--white);
+            padding: 10px 20px;
+            border-radius: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            animation: popIn 0.5s ease forwards 1s;
+            opacity: 0;
+            transform: scale(0.8);
+        }
+
+        .floating-screen {
+            position: absolute;
+            width: 200px;
+            right: -100px;
+            bottom: 50px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* Credit Cards */
+        .credit-cards-container {
+            position: relative;
+            height: 400px;
+            perspective: 1000px;
+        }
+
+        .credit-card {
+            position: absolute;
+            width: 300px;
+            height: 180px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            border-radius: 20px;
+            padding: 20px;
+            color: var(--white);
+            transform-style: preserve-3d;
+            transition: var(--transition);
+        }
+
+        .credit-card.floating {
+            top: 100px;
+            left: 50px;
+            background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary-lighter) 100%);
+            animation: floatCard 3s ease-in-out infinite;
+        }
+
+        .card-chip {
+            width: 50px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+
+        /* Process Flow */
+        .process-flow {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .process-step {
+            flex: 1;
+            text-align: center;
+            position: relative;
+        }
+
+        .process-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--primary-lighter);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            color: var(--white);
+            font-size: 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .process-icon::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            background: var(--primary-lighter);
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: pulse 2s infinite;
+        }
+
+        .process-arrow {
+            color: var(--primary-light);
+            font-size: 24px;
+            animation: bounce 2s infinite;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 30px;
+            height: 100%;
+            width: 2px;
+            background: var(--primary-lighter);
+        }
+
+        .timeline-step {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 30px;
+            opacity: 0.5;
+            transition: var(--transition);
+        }
+
+        .timeline-step.active {
+            opacity: 1;
+        }
+
+        .timeline-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .timeline-content {
+            margin-left: 20px;
+            padding-top: 10px;
+        }
+
+        /* Feature Steps */
+        .feature-steps .step {
+            background: var(--white);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-steps .step:hover {
+            transform: translateX(10px);
+        }
+
+        .feature-steps .step::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: linear-gradient(to bottom, var(--primary), var(--primary-light));
+            transition: var(--transition);
+        }
+
+        .feature-steps .step:hover::before {
+            width: 100%;
+            opacity: 0.1;
+        }
+
+        .step-number {
+            color: var(--primary);
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        @keyframes floatCard {
+            0%, 100% {
+                transform: translateY(0) rotate3d(1, 1, 0, 15deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate3d(1, 1, 0, -5deg);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 0.3;
+            }
+            50% {
+                transform: scale(1.2);
+                opacity: 0.1;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 0.3;
+            }
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateX(0);
+            }
+            50% {
+                transform: translateX(5px);
+            }
+        }
+
+        @keyframes popIn {
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .tab-container {
+                flex-direction: column;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .process-flow {
+                flex-direction: column;
+            }
+
+            .process-arrow {
+                transform: rotate(90deg);
+            }
+
+            .credit-card.floating {
+                left: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Content from previous HTML -->
+</body>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Tab switching
+        const tabs = document.querySelectorAll('.tab');
+        const panels = document.querySelectorAll('.feature-panel');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const target = tab.dataset.tab;
+                
+                // Update active tab
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                
+                // Update active panel
+                panels.forEach(panel => {
+                    panel.classList.remove('active');
+                    if (panel.id === `${target}-panel`) {
+                        panel.classList.add('active');
+                    }
+                });
+            });
+        });
+
+        // Timeline animation
+        const timelineSteps = document.querySelectorAll('.timeline-step');
+        let currentStep = 0;
+
+        function activateNextStep() {
+            timelineSteps[currentStep]?.classList.remove('active');
+            currentStep = (currentStep + 1) % timelineSteps.length;
+            timelineSteps[currentStep]?.classList.add('active');
+        }
+
+        setInterval(activateNextStep, 3000);
+
+        // Credit card hover effect
+        const creditCards = document.querySelectorAll('.credit-card');
+        
+        creditCards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const rotateX = (y - centerY) / 10;
+                const rotateY = -(x - centerX) / 10;
+                
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = '';
+            });
+        });
+    });
+</script>
+</html>
