@@ -1,4 +1,9 @@
- <div id="navbar-placeholder"></div>
+ <link href="css/normalize.css" rel="stylesheet" type="text/css">
+  <link href="css/webflow.css" rel="stylesheet" type="text/css">
+  <link href="css/credmate.webflow.css" rel="stylesheet" type="text/css">
+
+
+<div id="navbar-placeholder"></div>
   <section class="section-5">
     <div class="w-layout-blockcontainer main-container w-container">
       <div class="navbar-blog">
