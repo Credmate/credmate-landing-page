@@ -4,6 +4,7 @@
   --sub-head: 35px;
   --head: 50px;
   --normal-text: 25px;
+  --font-primary: Gilroy, Arial, sans-serif;
 }
 
 .w-layout-blockcontainer {
@@ -34,6 +35,7 @@
   justify-content: center;
   align-items: center;
   display: block;
+  font-family: var(--font-primary);
 }
 
 .nav-layout-2 {
@@ -41,6 +43,7 @@
   align-items: center;
   display: flex;
   position: sticky;
+  font-family: var(--font-primary);
 }
 
 .text-field-4 {
@@ -74,6 +77,7 @@
   width: 25vw;
   padding: 0%;
   display: flex;
+  font-family: var(--font-primary);
 }
 
 .article._3 {
@@ -90,6 +94,7 @@
   font-size: 1.3vw;
   font-weight: 400;
   line-height: 1.3vw;
+  font-family: var(--font-primary);
 }
 
 .nav-link-2:hover {
@@ -100,7 +105,7 @@
   color: #000;
   margin-left: .1vw;
   padding: 5px;
-  font-family: Fontspring Demo Integralcf, Impact, sans-serif;
+  font-family: var(--font-primary);
   font-weight: 400;
 }
 
@@ -113,7 +118,7 @@
   margin-right: 0;
   padding-left: 10px;
   padding-right: 10px;
-  font-family: Fontspring Demo Integralcf, Impact, sans-serif;
+  font-family: var(--font-primary);
   font-weight: 400;
   display: block;
 }
@@ -124,6 +129,7 @@
   padding: 2vh 2vw;
   text-decoration: none;
   display: inline-block;
+  font-family: var(--font-primary);
 }
 
 .link-block.stay {
@@ -138,6 +144,7 @@
   border: 1px solid #fff;
   border-radius: 50px;
   position: static;
+  font-family: var(--font-primary);
 }
 
 .navbar-2._2nd {
@@ -152,6 +159,7 @@
   margin-left: auto;
   margin-right: auto;
   display: flex;
+  font-family: var(--font-primary);
 }
 
 .image-8 {
@@ -172,6 +180,7 @@
   margin-right: auto;
   padding: .3vh .3vw .3vh 2vw;
   display: none;
+  font-family: var(--font-primary);
 }
 
 .search.stay {
@@ -188,6 +197,8 @@
   padding: 1.5vh 2vw;
   font-size: 1vw;
   line-height: 1.5vw;
+  font-family: var(--font-primary);
+  font-weight: 500;
 }
 
 .standard-button._2 {
@@ -195,7 +206,7 @@
   background-color: #a2195e;
   margin-top: 4%;
   padding: 4% 6%;
-  font-family: Gilroy, Arial, sans-serif;
+  font-family: var(--font-primary);
   font-size: 1vw;
   font-weight: 500;
 }
@@ -209,6 +220,7 @@
   margin-right: 0;
   padding: 1vh 1.5rem;
   display: block;
+  font-family: var(--font-primary);
 }
 
 .dropdown-list {
@@ -229,6 +241,7 @@
   font-size: 4vw;
   font-weight: 700;
   line-height: 120%;
+  font-family: var(--font-primary);
 }
 
 .standard-head.crousal {
@@ -238,12 +251,14 @@
   font-size: 2.78vw;
   font-weight: 600;
   line-height: 3.5vw;
+  font-family: var(--font-primary);
 }
 
 .submit-button {
   background-color: #a2195e;
   border-radius: 30px;
   font-weight: 500;
+  font-family: var(--font-primary);
 }
 
 .category-parent {
@@ -251,6 +266,7 @@
   border-radius: 20px;
   margin-top: 3vh;
   display: flex;
+  font-family: var(--font-primary);
 }
 
 .heading {
@@ -260,12 +276,14 @@
   font-size: 1.3vw;
   font-weight: 500;
   line-height: 1.5vw;
+  font-family: var(--font-primary);
 }
 
 .form-2 {
   justify-content: flex-start;
   align-items: flex-start;
   display: flex;
+  font-family: var(--font-primary);
 }
 
 .hero-div {
@@ -276,6 +294,7 @@
   justify-content: center;
   align-items: center;
   display: flex;
+  font-family: var(--font-primary);
 }
 
 .brand-2 {
@@ -285,12 +304,14 @@
   margin-top: auto;
   margin-bottom: auto;
   display: flex;
+  font-family: var(--font-primary);
 }
 
 .barcode-wrapper-2 {
   justify-content: center;
   align-items: center;
   display: flex;
+  font-family: var(--font-primary);
 }
 
 .image-15 {
@@ -302,6 +323,7 @@
   margin-top: 6.94vw;
   padding: 0%;
   display: flex;
+  font-family: var(--font-primary);
 }
 
 .nav-menu {
@@ -313,11 +335,13 @@
   padding-top: 0;
   padding-bottom: 0;
   display: flex;
+  font-family: var(--font-primary);
 }
 
 .child {
   width: 60%;
   margin-top: 3%;
+  font-family: var(--font-primary);
 }
 
 .standard-container {
@@ -327,6 +351,7 @@
   background-attachment: scroll;
   max-width: none;
   padding: 2vh 3.75vw 10px;
+  font-family: var(--font-primary);
 }
 
 .hero-crousal {
@@ -343,20 +368,24 @@
   font-size: 18px;
   font-weight: 500;
   display: flex;
+  font-family: var(--font-primary);
 }
 
 .trending {
   margin-top: 3vh;
   display: flex;
+  font-family: var(--font-primary);
 }
 
 .text-block-10 {
   margin-left: .3vw;
   display: inline-block;
+  font-family: var(--font-primary);
 }
 
 .dropdown {
   vertical-align: baseline;
+  font-family: var(--font-primary);
 }
 
 .category {
@@ -365,6 +394,7 @@
   border-radius: 20px;
   width: 25vw;
   padding: 1.5%;
+  font-family: var(--font-primary);
 }
 
 .category._3 {
@@ -375,6 +405,8 @@
   margin-top: 2vh;
   font-size: 1.25vw;
   line-height: 1.5vw;
+  font-family: var(--font-primary);
+  font-weight: 400;
 }
 
 .standard-para._3 {
@@ -382,6 +414,7 @@
   font-size: 1.9vw;
   font-weight: 600;
   line-height: 1.9vw;
+  font-family: var(--font-primary);
 }
 
 .standard-para._2 {
@@ -389,6 +422,7 @@
   font-size: 1.8vw;
   font-weight: 500;
   line-height: 2.3vw;
+  font-family: var(--font-primary);
 }
 
 .search-input-2 {
@@ -405,6 +439,7 @@
   font-size: 1.3vw;
   font-weight: 500;
   line-height: 1.5vw;
+  font-family: var(--font-primary);
 }
 
 .text-block-4.stay {
@@ -418,6 +453,7 @@
   display: inline;
   position: static;
   left: 5vw;
+  font-family: var(--font-primary);
 }
 
 .article-container {
@@ -426,6 +462,7 @@
   padding-top: 3vh;
   padding-bottom: 3vh;
   overflow: visible;
+  font-family: var(--font-primary);
 }
 
 .article-container.trending-now {
@@ -436,6 +473,7 @@
   padding-bottom: 5%;
   padding-left: 5%;
   padding-right: 5%;
+  font-family: var(--font-primary);
 }
 
 .small-head {
@@ -443,6 +481,7 @@
   font-size: 1.3vw;
   line-height: 1.5vw;
   display: none;
+  font-family: var(--font-primary);
 }
 
 .small-head.crousal {
@@ -452,6 +491,7 @@
   font-weight: 500;
   line-height: 1.11vw;
   display: block;
+  font-family: var(--font-primary);
 }
 
 .small-head.date {
@@ -460,6 +500,7 @@
   font-size: 1vw;
   font-weight: 400;
   line-height: 1vw;
+  font-family: var(--font-primary);
 }
 
 .category-container {
@@ -467,6 +508,7 @@
   margin-top: 3vh;
   padding-top: 3vh;
   padding-bottom: 3vh;
+  font-family: var(--font-primary);
 }
 
 .navbar-3 {
@@ -478,11 +520,13 @@
   border-radius: 50px;
   width: 20%;
   padding: 1% 2%;
+  font-family: var(--font-primary);
 }
 
 .form-block-2 {
   width: 70vw;
   margin-top: 1vh;
+  font-family: var(--font-primary);
 }
 
 .text-block-5 {
@@ -491,12 +535,14 @@
   padding-top: 0%;
   font-size: 1vw;
   font-weight: 600;
+  font-family: var(--font-primary);
 }
 
 .link-block-2 {
   margin-top: 2%;
   text-decoration: none;
   display: flex;
+  font-family: var(--font-primary);
 }
 
 .contect-heading {
@@ -505,6 +551,7 @@
   font-size: 2.3vw;
   font-weight: 600;
   line-height: 2.5vw;
+  font-family: var(--font-primary);
 }
 
 .image-13 {
@@ -527,7 +574,7 @@
   margin-top: 0;
   margin-bottom: 0;
   margin-left: 1vw;
-  font-family: Gilroy, Arial, sans-serif;
+  font-family: var(--font-primary);
   font-size: 1.11vw;
   font-weight: 400;
   line-height: 100%;
@@ -536,7 +583,7 @@
 .footer-content.download {
   color: #fff;
   margin-top: 0;
-  font-family: Fontspring Demo Integralcf, Impact, sans-serif;
+  font-family: var(--font-primary);
 }
 
 .footer-content.end {
@@ -544,12 +591,13 @@
   margin-left: 0;
   margin-right: auto;
   font-size: .97vw;
+  font-family: var(--font-primary);
 }
 
 .footer-content.phone {
   text-transform: none;
   margin-top: 0;
-  font-family: Gilroy, Arial, sans-serif;
+  font-family: var(--font-primary);
   font-size: 1.11vw;
   font-weight: 500;
 }
@@ -557,7 +605,7 @@
 .footer-content.head {
   color: #fff;
   margin-top: 0;
-  font-family: Gilroy, Arial, sans-serif;
+  font-family: var(--font-primary);
   font-size: 1.11vw;
   font-weight: 500;
 }
@@ -565,6 +613,7 @@
 .company-footer {
   margin-left: 8vw;
   padding-top: 0;
+  font-family: var(--font-primary);
 }
 
 .footer-logo-part-2 {
@@ -572,6 +621,7 @@
   justify-content: flex-start;
   align-items: flex-start;
   display: flex;
+  font-family: var(--font-primary);
 }
 
 .main-container-2 {
@@ -584,6 +634,7 @@
   font-size: 1.8vw;
   line-height: 2.5vw;
   display: block;
+  font-family: var(--font-primary);
 }
 
 .main-container-2.footer {
@@ -592,6 +643,7 @@
   max-width: none;
   margin-top: 0;
   padding-top: 10vh;
+  font-family: var(--font-primary);
 }
 
 .footer-download {
@@ -601,6 +653,7 @@
   margin-left: 8vw;
   padding-top: 0;
   display: flex;
+  font-family: var(--font-primary);
 }
 
 .footer-2 {
@@ -608,6 +661,7 @@
   justify-content: flex-start;
   align-items: flex-start;
   display: flex;
+  font-family: var(--font-primary);
 }
 
 .phone-footer {
@@ -615,6 +669,7 @@
   align-items: center;
   margin-top: 3vh;
   display: block;
+  font-family: var(--font-primary);
 }
 
 .image-12 {
@@ -625,6 +680,7 @@
 
 .footer-link-2._0 {
   margin-left: 1vw;
+  font-family: var(--font-primary);
 }
 
 .link-block-4 {
@@ -633,15 +689,18 @@
   margin-top: 3vh;
   text-decoration: none;
   display: flex;
+  font-family: var(--font-primary);
 }
 
 .div-block-43, .hero-child {
   display: flex;
+  font-family: var(--font-primary);
 }
 
 .social-media {
   margin-top: 1.39vw;
   display: flex;
+  font-family: var(--font-primary);
 }
 
 .image-18 {
@@ -650,7 +709,7 @@
 
 .blog-ext-head {
   color: #000;
-  font-family: Gilroy, Arial, sans-serif;
+  font-family: var(--font-primary);
   font-size: 3.13vw;
   font-weight: 700;
   line-height: 140%;
@@ -658,7 +717,7 @@
 
 .date {
   margin-top: 2.3vw;
-  font-family: Gilroy, Arial, sans-serif;
+  font-family: var(--font-primary);
   font-size: 1.25vw;
   font-weight: 500;
   line-height: 100%;
@@ -666,33 +725,38 @@
 
 .text-block-12 {
   color: #555;
+  font-family: var(--font-primary);
 }
 
 .media-head {
   margin-top: 1.39vw;
   font-size: 1.25vw;
   line-height: 100%;
+  font-family: var(--font-primary);
 }
 
 .right-hero {
   margin-left: 4.17vw;
+  font-family: var(--font-primary);
 }
 
 .information-block {
   padding-top: 5vw;
   padding-bottom: 5vw;
+  font-family: var(--font-primary);
 }
 
 .div-block-44 {
   width: 54.86vw;
   margin-left: auto;
   margin-right: auto;
+  font-family: var(--font-primary);
 }
 
 .mid-para {
   text-align: left;
   margin-top: 1vh;
-  font-family: Gilroy, Arial, sans-serif;
+  font-family: var(--font-primary);
   font-size: 1.53vw;
   font-weight: 500;
   line-height: 155%;
@@ -700,6 +764,7 @@
 
 .mid-para._2 {
   margin-top: 3vh;
+  font-family: var(--font-primary);
 }
 
 .div-block-44-copy {
@@ -707,17 +772,19 @@
   width: 54.86vw;
   margin-left: auto;
   margin-right: auto;
+  font-family: var(--font-primary);
 }
 
 .first-info {
   margin-top: 3vh;
+  font-family: var(--font-primary);
 }
 
 .min-head {
   color: #000;
   margin-top: 0;
   margin-bottom: 0;
-  font-family: Gilroy, Arial, sans-serif;
+  font-family: var(--font-primary);
   font-size: 1.53vw;
   font-weight: 500;
   line-height: 100%;
@@ -728,17 +795,20 @@
   padding-left: 0;
   padding-right: 0;
   overflow: hidden;
+  font-family: var(--font-primary);
 }
 
 .standard-para-2 {
   margin-top: 2vh;
   font-size: 1.25vw;
   line-height: 1.5vw;
+  font-family: var(--font-primary);
+  font-weight: 400;
 }
 
 .standard-para-2._2 {
   margin-top: 4%;
-  font-family: Gilroy, Arial, sans-serif;
+  font-family: var(--font-primary);
   font-size: 1.8vw;
   font-weight: 500;
   line-height: 2.3vw;
@@ -754,7 +824,7 @@
 .text-block-13 {
   color: #555;
   margin-top: 4%;
-  font-family: Gilroy, Arial, sans-serif;
+  font-family: var(--font-primary);
   font-size: 1.3vw;
   font-weight: 500;
   line-height: 1.5vw;
@@ -762,7 +832,7 @@
 
 .small-head-2 {
   color: #8a8a8a;
-  font-family: Gilroy, Arial, sans-serif;
+  font-family: var(--font-primary);
   font-size: 1.3vw;
   line-height: 1.5vw;
   display: none;
@@ -774,11 +844,13 @@
   font-size: 1vw;
   font-weight: 400;
   line-height: 1vw;
+  font-family: var(--font-primary);
 }
 
 .container-8 {
   max-width: none;
   padding: 2vw 3.75vw 5vw;
+  font-family: var(--font-primary);
 }
 
 @media screen and (min-width: 1280px) {
@@ -1679,6 +1751,115 @@
   }
 }
 
+.hero-text {
+  text-align: center;
+  padding: 60px 20px;
+  background: linear-gradient(135deg, rgba(87, 102, 255, 0.1) 0%, rgba(162, 25, 94, 0.1) 100%);
+  border-radius: 20px;
+  margin: 40px auto;
+  max-width: 800px;
+  font-family: var(--font-primary);
+}
+
+.giltoy-bold {
+  font-family: var(--font-primary);
+  font-weight: 700;
+  font-size: 3.5rem;
+  background: linear-gradient(135deg, var(--b) 0%, #a2195e 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 20px;
+}
+
+.text-block-2 {
+  font-family: var(--font-primary);
+  font-weight: 500;
+  font-size: 1.2rem;
+  color: #666;
+}
+
+._1st-point {
+  font-family: var(--font-primary);
+  transition: all 0.5s ease;
+  padding: 30px;
+  border-radius: 15px;
+  margin-bottom: 30px;
+  background: #fff;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  opacity: 0.5;
+  transform: translateY(20px);
+}
+
+._1st-point.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.statement-wrapper {
+  position: relative;
+  min-height: 100px;
+}
+
+.statement {
+  font-family: var(--font-primary);
+  transition: all 0.5s ease;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.statement.bold {
+  font-weight: 600;
+  font-size: 1.2rem;
+  line-height: 1.6;
+  color: #333;
+}
+
+.statement.normal {
+  font-weight: 400;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #666;
+}
+
+.statement.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.next-wrapper {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+  padding: 8px 16px;
+  border-radius: 30px;
+  background: linear-gradient(135deg, rgba(87, 102, 255, 0.1) 0%, rgba(162, 25, 94, 0.1) 100%);
+}
+
+.next-wrapper:hover {
+  background: linear-gradient(135deg, rgba(87, 102, 255, 0.2) 0%, rgba(162, 25, 94, 0.2) 100%);
+}
+
+.next {
+  font-family: var(--font-primary);
+  font-weight: 500;
+  font-size: 1rem;
+  color: #333;
+}
+
+.probelm {
+  font-family: var(--font-primary);
+  font-weight: 600;
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+  background: linear-gradient(135deg, var(--b) 0%, #a2195e 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 
 @font-face {
   font-family: 'Gilroy';
