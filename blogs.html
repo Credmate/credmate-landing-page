@@ -159,18 +159,7 @@
       </div>
       <div class="w-layout-blockcontainer article-container trending-now w-container">
         <h1 class="contect-heading">Trending Now</h1>
-        <div class="trending">
-          <div class="article"><img src="images/3d-render-light-bulb-speech-bubble-solution-1.jpg" loading="lazy" alt="" class="image-8">
-            <div class="article-child">
-              <h6 class="small-head date">Dec 8, 2024</h6>
-              <div class="standard-para _2">10 Tips for Choosing the Right Borrower on P2P Platforms</div>
-              <div class="text-block-4">Discover key factors to evaluate when selecting borrowers to minimize risk and maximize returns.</div>
-              <a href="https://esh-f3c774-b75c11ccd36ed381bdc9f5cbfd3d.webflow.io/" class="standard-button _2 w-button">Read More</a>
-            </div>
-          </div>
-          
-         
-        </div>
+        <div class="trending"></div>
         <div class="stay-informed">
           <h1 class="contect-heading">Stay Informed</h1>
           <div class="text-block-4 stay">Get the latest insights and tips delivered to your inbox.</div>
@@ -279,67 +268,14 @@
   <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=6757401e206a244bbbb6ec9c" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
   <script src="js/webflow.js" type="text/javascript"></script>
   
-  <script>
-    // Function to show enlarged QR code
-    function showEnlargedQR() {
-      const overlay = document.createElement('div');
-      overlay.className = 'overlay';
-      document.body.appendChild(overlay);
-      overlay.style.display = 'block';
-
-      const enlargedQR = document.createElement('div');
-      enlargedQR.className = 'qr-enlarged';
-      document.body.appendChild(enlargedQR);
-
-      const qrCode = new QRCode(enlargedQR, {
-        text: "https://play.google.com/store/apps/details?id=com.credmate.app",
-        width: 256,
-        height: 256,
-        colorDark: "#000000",
-        colorLight: "#ffffff",
-      });
-
-      overlay.addEventListener('click', () => {
-        document.body.removeChild(overlay);
-        document.body.removeChild(enlargedQR);
-      });
-    }
-
-    // Initialize QR code and add click handler when DOM is loaded
-    document.addEventListener('DOMContentLoaded', () => {
-      // Create small QR code for navbar
-      new QRCode(document.getElementById("qrcode"), {
-        text: "https://play.google.com/store/apps/details?id=com.credmate.app",
-        width: 28,
-        height: 28,
-        colorDark: "#000000",
-        colorLight: "#ffffff",
-      });
-
-      // Create small QR code for footer
-      new QRCode(document.getElementById("qrcode-footer"), {
-        text: "https://play.google.com/store/apps/details?id=com.credmate.app",
-        width: 28,
-        height: 28,
-        colorDark: "#000000",
-        colorLight: "#ffffff",
-      });
-
-      // Add click handlers for both navbar and footer QR codes
-      document.querySelectorAll('.qr-wrapper').forEach(wrapper => {
-        wrapper.addEventListener('click', showEnlargedQR);
-      });
-    });
-  </script>
-  
   <!-- Firebase SDK -->
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics-compat.js"></script>
   
-  <!-- Initialize Firebase -->
   <script>
+    // Initialize Firebase
     const firebaseConfig = {
       apiKey: "AIzaSyDt2eJ0GSbVIkLDjpCbQF0mdlGpEXK2E5E",
       authDomain: "credmate-463b5.firebaseapp.com",
@@ -350,7 +286,7 @@
       appId: "1:515618221705:web:6485c8d60f6cbf363c2058",
       measurementId: "G-9NW2HGWN8L"
     };
-    
+
     // Initialize Firebase
     console.log('Initializing Firebase...');
     try {
@@ -376,21 +312,79 @@
     } catch (error) {
       console.error('Error initializing Firestore:', error);
     }
-
+    
     // Function to format date
     function formatDate(timestamp) {
       console.log('Formatting date for timestamp:', timestamp);
+      if (!timestamp) return 'No date';
+      
       try {
         const date = timestamp.toDate();
         const options = { year: 'numeric', month: 'short', day: 'numeric' };
-        const formattedDate = date.toLocaleDateString('en-US', options);
-        console.log('Formatted date:', formattedDate);
-        return formattedDate;
+        return date.toLocaleDateString('en-US', options);
       } catch (error) {
         console.error('Error formatting date:', error);
-        return 'Date unavailable';
+        return 'Invalid date';
       }
     }
+
+    // Function to show enlarged QR code
+    function showEnlargedQR() {
+      const overlay = document.createElement('div');
+      overlay.className = 'overlay';
+      document.body.appendChild(overlay);
+      overlay.style.display = 'block';
+
+      const enlargedQR = document.createElement('div');
+      enlargedQR.className = 'qr-enlarged';
+      document.body.appendChild(enlargedQR);
+
+      const qrCode = new QRCode(enlargedQR, {
+        text: "https://play.google.com/store/apps/details?id=com.credmate.app",
+        width: 256,
+        height: 256,
+        colorDark: "#000000",
+        colorLight: "#ffffff",
+      });
+
+      overlay.addEventListener('click', () => {
+        document.body.removeChild(overlay);
+        document.body.removeChild(enlargedQR);
+      });
+    }
+
+    // Initialize QR codes when DOM is loaded
+    document.addEventListener('DOMContentLoaded', () => {
+      // Create small QR code for navbar
+      new QRCode(document.getElementById("qrcode"), {
+        text: "https://play.google.com/store/apps/details?id=com.credmate.app",
+        width: 28,
+        height: 28,
+        colorDark: "#000000",
+        colorLight: "#ffffff",
+      });
+
+      // Create small QR code for footer
+      if (document.getElementById("qrcode-footer")) {
+        new QRCode(document.getElementById("qrcode-footer"), {
+          text: "https://play.google.com/store/apps/details?id=com.credmate.app",
+          width: 28,
+          height: 28,
+          colorDark: "#000000",
+          colorLight: "#ffffff",
+        });
+      }
+
+      // Add click handlers for QR codes
+      document.querySelectorAll('.qr-wrapper').forEach(wrapper => {
+        wrapper.addEventListener('click', showEnlargedQR);
+      });
+
+      // Fetch articles
+      console.log('Initiating article fetches...');
+      fetchLatestArticles();
+      fetchTrendingArticles();
+    });
 
     // Fetch latest articles
     async function fetchLatestArticles() {
@@ -450,11 +444,136 @@
       }
     }
 
-    // Call the function when the page loads
+    // Fetch trending articles
+    async function fetchTrendingArticles() {
+      console.log('🔥 TRENDING NOW: Starting to fetch trending articles...');
+      try {
+        // Verify Firestore connection
+        if (!db) {
+          throw new Error('Firestore is not initialized');
+        }
+        console.log('🔥 TRENDING NOW: Firestore connection verified');
+
+        // Get reference and log collection name
+        const articlesRef = db.collection('Blogs');
+        console.log('🔥 TRENDING NOW: Using collection:', 'Blogs');
+        
+        // Build and log query
+        console.log('🔥 TRENDING NOW: Building Firestore query...');
+        const query = articlesRef
+          .where('trending', '==', true)
+          .orderBy('creation_date', 'desc')
+          .limit(4);
+        
+        console.log('🔥 TRENDING NOW: Query details:', {
+          collection: 'Blogs',
+          filter: 'trending == true',
+          orderBy: 'creation_date desc',
+          limit: 4
+        });
+        
+        // Execute query with timeout
+        console.log('🔥 TRENDING NOW: Executing Firestore query...');
+        const snapshot = await Promise.race([
+          query.get(),
+          new Promise((_, reject) => 
+            setTimeout(() => reject(new Error('Query timeout')), 10000)
+          )
+        ]);
+
+        // Log query results
+        console.log('🔥 TRENDING NOW: Query completed. Documents found:', {
+          empty: snapshot.empty,
+          size: snapshot.size,
+          docs: snapshot.docs.map(doc => ({
+            id: doc.id,
+            trending: doc.data().trending,
+            creation_date: doc.data().creation_date,
+            blogheading: doc.data().blogheading
+          }))
+        });
+        
+        // Get and verify container
+        const trendingContainer = document.querySelector('.trending');
+        if (!trendingContainer) {
+          throw new Error('Trending container not found in DOM');
+        }
+        console.log('🔥 TRENDING NOW: Found trending container in DOM');
+        
+        // Clear container
+        console.log('🔥 TRENDING NOW: Clearing existing content...');
+        trendingContainer.innerHTML = '';
+
+        // Handle no results
+        if (snapshot.empty) {
+          console.log('🔥 TRENDING NOW: No trending articles found');
+          trendingContainer.innerHTML = '<div class="no-articles" style="text-align: center; padding: 20px;">No trending articles available at the moment</div>';
+          return;
+        }
+
+        // Process documents
+        console.log('🔥 TRENDING NOW: Processing trending documents...');
+        snapshot.forEach((doc) => {
+          const article = doc.data();
+          console.log('🔥 TRENDING NOW: Processing article:', {
+            id: doc.id,
+            trending: article.trending,
+            creation_date: article.creation_date,
+            blogheading: article.blogheading
+          });
+          
+          const articleHtml = `
+            <div class="article">
+              <div style="width: 285px; height: 147px; overflow: hidden;">
+                <img src="${article.image || ''}" loading="lazy" alt="" class="image-8" style="width: 100%; height: 100%; object-fit: cover;">
+              </div>
+              <div class="article-child">
+                <h6 class="small-head date">${formatDate(article.creation_date)}</h6>
+                <div class="standard-para _2">${article.blogheading || 'Untitled'}</div>
+                <div class="text-block-4">${(article.blogtext || 'No content available').length > 150 ? article.blogtext.substring(0, 150) + '...' : article.blogtext || 'No content available'}</div>
+                <a href="dynamic-blog.html?id=${doc.id}" class="standard-button _2 w-button">Read More</a>
+              </div>
+            </div>
+          `;
+          
+          console.log('🔥 TRENDING NOW: Adding article to container:', {
+            id: doc.id,
+            heading: article.blogheading
+          });
+          trendingContainer.innerHTML += articleHtml;
+        });
+        
+        console.log('🔥 TRENDING NOW: Successfully loaded all trending articles');
+      } catch (error) {
+        console.error('🔥 TRENDING NOW ERROR:', {
+          message: error.message,
+          code: error.code,
+          stack: error.stack,
+          name: error.name
+        });
+        
+        // Try to show error in UI
+        try {
+          const trendingContainer = document.querySelector('.trending');
+          if (trendingContainer) {
+            trendingContainer.innerHTML = `
+              <div class="error-message" style="text-align: center; padding: 20px; color: #721c24; background-color: #f8d7da; border: 1px solid #f5c6cb; border-radius: 4px;">
+                Unable to load trending articles. Please try again later.
+              </div>
+            `;
+          }
+        } catch (uiError) {
+          console.error('🔥 TRENDING NOW ERROR: Failed to show error message in UI:', uiError);
+        }
+      }
+    }
+
+    // Call both functions when the page loads
     console.log('Setting up DOMContentLoaded listener...');
     document.addEventListener('DOMContentLoaded', () => {
-      console.log('DOM fully loaded, initiating article fetch...');
+      console.log('DOM fully loaded, initiating article fetches...');
       fetchLatestArticles();
+      fetchTrendingArticles();
     });
   </script>
   <script>
