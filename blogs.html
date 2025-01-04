@@ -948,11 +948,71 @@ line-height: 100%;
       }
     }
 
-    // Call the function when the page loads
+    // Fetch trending articles
+    async function fetchTrendingArticles() {
+      console.log('Starting to fetch trending articles...');
+      try {
+        console.log('Getting reference to blogs collection...');
+        const articlesRef = db.collection('Blogs');
+        
+        console.log('Executing Firestore query for trending articles...');
+        const snapshot = await articlesRef
+          .where('trending', '==', true)
+          .orderBy('creation_date', 'desc')
+          .limit(4)
+          .get();
+
+        console.log('Query completed. Number of trending documents:', snapshot.size);
+        
+        const articleContainer = document.querySelector('.trending');
+        if (!articleContainer) {
+          console.error('Trending article container not found in DOM');
+          return;
+        }
+        
+        console.log('Clearing existing content...');
+        articleContainer.innerHTML = ''; // Clear existing content
+
+        console.log('Processing trending documents...');
+        snapshot.forEach((doc) => {
+          console.log('Processing trending document ID:', doc.id);
+          const article = doc.data();
+          console.log('Trending article data:', article);
+          
+          const articleHtml = `
+            <div class="article">
+              <div style="width: 285px; height: 147px; overflow: hidden;">
+                <img src="${article.image || ''}" loading="lazy" alt="" class="image-8" style="width: 100%; height: 100%; object-fit: cover;">
+              </div>
+              <div class="article-child">
+                <h6 class="small-head date">${formatDate(article.creation_date)}</h6>
+                <div class="standard-para _2">${article.blogheading || 'Untitled'}</div>
+                <div class="text-block-4">${(article.blogtext || 'No content available').length > 150 ? article.blogtext.substring(0, 150) + '...' : article.blogtext || 'No content available'}</div>
+                <a href="dynamic-blog.html?id=${doc.id}" class="standard-button _2 w-button">Read More</a>
+              </div>
+            </div>
+          `;
+          console.log('Adding trending article to container');
+          articleContainer.innerHTML += articleHtml;
+        });
+        
+        console.log('Finished loading all trending articles');
+      } catch (error) {
+        console.error("Error fetching trending articles:", error);
+        console.error("Error details:", {
+          code: error.code,
+          message: error.message,
+          stack: error.stack
+        });
+      }
+    }
+
+    // Call both functions when the page loads
     console.log('Setting up DOMContentLoaded listener...');
     document.addEventListener('DOMContentLoaded', () => {
-      console.log('DOM fully loaded, initiating article fetch...');
+      console.log('DOM fully loaded, initiating article fetches...');
       fetchLatestArticles();
+      fetchTrendingArticles();
     });
   </script>
   <script>
@@ -982,143 +1042,7 @@ line-height: 100%;
   </script>
 
 <script>
-  var qrcode = new QRCode(document.getElementById("qrcode"), {
-    text: "https://credmate.netlify.app",
-    width: 28,
-    height: 28,
-    colorDark : "#000000",
-    colorLight : "#ffffff",
-    correctLevel : QRCode.CorrectLevel.H
-  });
-
-  function showEnlargedQR() {
-    let overlay = document.querySelector('.overlay');
-    if (!overlay) {
-      overlay = document.createElement('div');
-      overlay.className = 'overlay';
-      document.body.appendChild(overlay);
-    }
-
-    let enlargedQR = document.querySelector('.qr-enlarged');
-    if (!enlargedQR) {
-      enlargedQR = document.createElement('div');
-      enlargedQR.className = 'qr-enlarged';
-      let newQR = new QRCode(enlargedQR, {
-        text: "https://credmate.netlify.app",
-        width: 200,
-        height: 200,
-        colorDark : "#000000",
-        colorLight : "#ffffff",
-        correctLevel : QRCode.CorrectLevel.H
-      });
-      document.body.appendChild(enlargedQR);
-    }
-
-    overlay.style.display = 'block';
-    enlargedQR.style.display = 'block';
-
-    overlay.onclick = function() {
-      overlay.style.display = 'none';
-      enlargedQR.style.display = 'none';
-    };
-  }
-
-  document.querySelectorAll('.qr-wrapper').forEach(wrapper => {
-    wrapper.addEventListener('click', showEnlargedQR);
-  });
-</script>
-
-<script>
-// Create QR code
-var qrcode = new QRCode(document.getElementById("qrcode"), {
-  text: "https://credmate.netlify.app",
-  width: 28,
-  height: 28,
-  colorDark : "#000000",
-  colorLight : "#ffffff",
-  correctLevel : QRCode.CorrectLevel.H
-});
-
-// Function to show enlarged QR
-function showEnlargedQR() {
-  // Create overlay if it doesn't exist
-  let overlay = document.querySelector('.overlay');
-  if (!overlay) {
-    overlay = document.createElement('div');
-    overlay.className = 'overlay';
-    document.body.appendChild(overlay);
-  }
-
-  // Create enlarged QR code if it doesn't exist
-  let enlargedQR = document.querySelector('.qr-enlarged');
-  if (!enlargedQR) {
-    enlargedQR = document.createElement('div');
-    enlargedQR.className = 'qr-enlarged';
-    let newQR = new QRCode(enlargedQR, {
-      text: "https://credmate.netlify.app",
-      width: 200,
-      height: 200,
-      colorDark : "#000000",
-      colorLight : "#ffffff",
-      correctLevel : QRCode.CorrectLevel.H
-    });
-    document.body.appendChild(enlargedQR);
-  }
-
-  // Show overlay and enlarged QR
-  overlay.style.display = 'block';
-  enlargedQR.style.display = 'block';
-
-  // Hide when clicking overlay
-  overlay.onclick = function() {
-    overlay.style.display = 'none';
-    enlargedQR.style.display = 'none';
-  };
-}
-
-// Add click handlers for both navbar and footer QR codes
-document.querySelectorAll('.qr-wrapper').forEach(wrapper => {
-  wrapper.addEventListener('click', showEnlargedQR);
-});
-document.querySelectorAll('.nav-link.clickable').forEach(link => {
-  link.addEventListener('click', showEnlargedQR);
-});
-</script>
-<script>
-// Create QR code
-var qrcodeFooter = new QRCode(document.getElementById("qrcode-footer"), {
-  text: "https://credmate.netlify.app",
-  width: 100,
-  height: 100,
-  colorDark : "#000000",
-  colorLight : "#ffffff",
-  correctLevel : QRCode.CorrectLevel.H
-});
-</script>
-<div class="bug-report-modal">
-<div class="bug-report-content">
-  <button class="bug-report-close">&times;</button>
-  <div class="bug-report-header">
-    <div class="bug-report-icon">🐛</div>
-    <h2 class="bug-report-title">We're Sorry You Found a Bug</h2>
-    <p class="bug-report-subtitle">Thank you for being responsible and helping us improve. We're working hard to provide a seamless experience for all our users.</p>
-  </div>
-  <form class="bug-report-form" id="bugReportForm">
-    <div class="bug-report-field">
-      <label class="bug-report-label" for="bugDescription">Bug Description</label>
-      <textarea class="bug-report-input bug-report-textarea" id="bugDescription" required placeholder="Please describe what happened..."></textarea>
-    </div>
-    <div class="bug-report-field">
-      <label class="bug-report-label" for="bugEmail">Email <span class="optional-text">(optional - if you'd like updates about the bug)</span></label>
-      <input type="email" class="bug-report-input" id="bugEmail" placeholder="your@email.com">
-    </div>
-    <button type="submit" class="bug-report-submit">Submit Report</button>
-  </form>
-</div>
-</div>
-
-<script>
-// Bug Report Modal Functionality
+  // Bug Report Modal Functionality
 document.addEventListener('DOMContentLoaded', function() {
   const reportBugLink = document.querySelector('#reportBugLink');
   const modal = document.querySelector('.bug-report-modal');
@@ -1174,116 +1098,25 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 </script>
-<div class="pricing-modal">
-<div class="pricing-content">
-  <button class="pricing-close">&times;</button>
-  <div class="pricing-header">
-    <h2 class="pricing-title">Choose Your Perfect Plan</h2>
-    <div class="country-toggle">
-      <button class="country-btn active" data-country="india">India</button>
-      <button class="country-btn" data-country="canada">Canada</button>
-    </div>
+<div class="bug-report-modal">
+<div class="bug-report-content">
+  <button class="bug-report-close">&times;</button>
+  <div class="bug-report-header">
+    <div class="bug-report-icon">🐛</div>
+    <h2 class="bug-report-title">We're Sorry You Found a Bug</h2>
+    <p class="bug-report-subtitle">Thank you for being responsible and helping us improve. We're working hard to provide a seamless experience for all our users.</p>
   </div>
-  <div class="pricing-grid" id="indiaPlans">
-    <div class="pricing-card">
-      <div class="plan-name">Pro Individual</div>
-      <div class="plan-price">
-        <span class="currency">₹</span>199
-        <span class="period">/year</span>
-      </div>
-      <ul class="plan-features">
-        <li>Daily credit monitoring</li>
-        <li>Real-time alerts</li>
-        <li>Credit score simulator</li>
-        <li>Identity theft protection</li>
-        <li>Premium support</li>
-      </ul>
-      <button class="plan-button">Choose Plan</button>
+  <form class="bug-report-form" id="bugReportForm">
+    <div class="bug-report-field">
+      <label class="bug-report-label" for="bugDescription">Bug Description</label>
+      <textarea class="bug-report-input bug-report-textarea" id="bugDescription" required placeholder="Please describe what happened..."></textarea>
     </div>
-    <div class="pricing-card popular">
-      <div class="popular-badge">Most Popular</div>
-      <div class="plan-name">Pro Business</div>
-      <div class="plan-price">
-        <span class="currency">₹</span>499
-        <span class="period">/year</span>
-      </div>
-      <ul class="plan-features">
-        <li>All Pro Individual features</li>
-        <li>Multiple user accounts</li>
-        <li>Business credit monitoring</li>
-        <li>Advanced reporting</li>
-        <li>Priority support</li>
-        <li>Custom dashboard</li>
-      </ul>
-      <button class="plan-button">Choose Plan</button>
+    <div class="bug-report-field">
+      <label class="bug-report-label" for="bugEmail">Email <span class="optional-text">(optional - if you'd like updates about the bug)</span></label>
+      <input type="email" class="bug-report-input" id="bugEmail" placeholder="your@email.com">
     </div>
-    <div class="pricing-card">
-      <div class="plan-name">Priority Business</div>
-      <div class="plan-price">
-        <span class="currency">₹</span>1,999
-        <span class="period">/year</span>
-      </div>
-      <ul class="plan-features">
-        <li>All Pro Business features</li>
-        <li>Dedicated account manager</li>
-        <li>Custom integration support</li>
-        <li>API access</li>
-        <li>24/7 premium support</li>
-        <li>Advanced analytics</li>
-      </ul>
-      <button class="plan-button">Choose Plan</button>
-    </div>
-  </div>
-  <div class="pricing-grid" id="canadaPlans" style="display: none;">
-    <div class="pricing-card">
-      <div class="plan-name">Pro Individual</div>
-      <div class="plan-price">
-        <span class="currency">$</span>199
-        <span class="period">/year</span>
-      </div>
-      <ul class="plan-features">
-        <li>Daily credit monitoring</li>
-        <li>Real-time alerts</li>
-        <li>Credit score simulator</li>
-        <li>Identity theft protection</li>
-        <li>Premium support</li>
-      </ul>
-      <button class="plan-button">Choose Plan</button>
-    </div>
-    <div class="pricing-card popular">
-      <div class="popular-badge">Most Popular</div>
-      <div class="plan-name">Pro Business</div>
-      <div class="plan-price">
-        <span class="currency">$</span>499
-        <span class="period">/year</span>
-      </div>
-      <ul class="plan-features">
-        <li>All Pro Individual features</li>
-        <li>Multiple user accounts</li>
-        <li>Business credit monitoring</li>
-        <li>Advanced reporting</li>
-        <li>Priority support</li>
-        <li>Custom dashboard</li>
-      </ul>
-      <button class="plan-button">Choose Plan</button>
-    </div>
-    <div class="pricing-card">
-      <div class="plan-name">Priority Business</div>
-      <div class="plan-price">
-        <span class="currency">$</span>1,999
-        <span class="period">/year</span>
-      </div>
-      <ul class="plan-features">
-        <li>All Pro Business features</li>
-        <li>Dedicated account manager</li>
-        <li>Custom integration support</li>
-        <li>API access</li>
-        <li>24/7 premium support</li>
-        <li>Advanced analytics</li>
-      </ul>
-      <button class="plan-button">Choose Plan</button>
-    </div>
-  </div>
+    <button type="submit" class="bug-report-submit">Submit Report</button>
+  </form>
 </div>
 </div>
 
