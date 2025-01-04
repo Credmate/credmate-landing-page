@@ -12,6 +12,7 @@
   <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous">
   <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  
   <style>
     .hero-container {
       position: relative;
@@ -60,6 +61,481 @@
       background: rgba(0,0,0,0.7);
       z-index: 999;
     }
+
+    /* Custom logo sizes */
+    img[src*="startup-canada-logo.jpg"],
+    img[src*="avcmg1k82.jpg"] {
+      width: 180px !important;
+      height: auto !important;
+      object-fit: contain !important;
+    }
+
+    img[src*="startupindia"] {
+      width: 220px !important;
+      height: auto !important;
+      object-fit: contain !important;
+    }
+
+    /* Bug Report Modal Styles */
+    .bug-report-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(5px);
+      z-index: 9999;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .bug-report-modal.active {
+      display: flex;
+      opacity: 1;
+    }
+
+    .bug-report-content {
+      background: linear-gradient(135deg, #fff, #f8f8f8);
+      border-radius: 20px;
+      padding: 40px;
+      width: 90%;
+      max-width: 500px;
+      margin: auto;
+      position: relative;
+      transform: translateY(-20px);
+      transition: transform 0.3s ease;
+      box-shadow: 0 10px 30px rgba(162, 25, 94, 0.2);
+    }
+
+    .bug-report-modal.active .bug-report-content {
+      transform: translateY(0);
+    }
+
+    .bug-report-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: none;
+      border: none;
+      color: #A2195E;
+      font-size: 24px;
+      cursor: pointer;
+      padding: 5px;
+      line-height: 1;
+    }
+
+    .bug-report-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .bug-report-icon {
+      font-size: 48px;
+      margin-bottom: 20px;
+      color: #A2195E;
+    }
+
+    .bug-report-title {
+      font-family: Fontspring Demo Integralcf, Impact, sans-serif;
+      color: #A2195E;
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .bug-report-subtitle {
+      font-family: Gilroy, Arial, sans-serif;
+      color: #666;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    .bug-report-form {
+      margin-top: 30px;
+    }
+
+    .bug-report-field {
+      margin-bottom: 20px;
+    }
+
+    .bug-report-label {
+      display: block;
+      font-family: Gilroy, Arial, sans-serif;
+      color: #333;
+      margin-bottom: 8px;
+    }
+
+    .bug-report-input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid rgba(162, 25, 94, 0.2);
+      border-radius: 8px;
+      font-family: Gilroy, Arial, sans-serif;
+      font-size: 14px;
+      transition: border-color 0.3s ease;
+    }
+
+    .bug-report-input:focus {
+      outline: none;
+      border-color: #A2195E;
+    }
+
+    .bug-report-textarea {
+      height: 120px;
+      resize: vertical;
+    }
+
+    .bug-report-submit {
+      background: linear-gradient(135deg, #A2195E, #7B1347);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 24px;
+      font-family: Fontspring Demo Integralcf, Impact, sans-serif;
+      font-size: 16px;
+      cursor: pointer;
+      width: 100%;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .bug-report-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(162, 25, 94, 0.3);
+    }
+
+    .optional-text {
+      font-size: 12px;
+      color: #888;
+      margin-left: 5px;
+    }
+
+    /* Pricing Modal Styles */
+    .pricing-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(10px);
+      z-index: 9999;
+      opacity: 0;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .pricing-modal.active {
+      display: flex;
+      opacity: 1;
+    }
+
+    .pricing-content {
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.95));
+      backdrop-filter: blur(20px);
+      border-radius: 30px;
+      padding: 50px;
+      width: 95%;
+      max-width: 1200px;
+      margin: auto;
+      position: relative;
+      transform: translateY(-20px) scale(0.95);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .pricing-modal.active .pricing-content {
+      transform: translateY(0) scale(1);
+    }
+
+    .pricing-close {
+      position: absolute;
+      top: 25px;
+      right: 25px;
+      background: rgba(162, 25, 94, 0.1);
+      border: none;
+      color: #A2195E;
+      font-size: 24px;
+      cursor: pointer;
+      padding: 8px;
+      line-height: 1;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .pricing-close:hover {
+      background: rgba(162, 25, 94, 0.2);
+      transform: rotate(90deg);
+    }
+
+    .pricing-header {
+      text-align: center;
+      margin-bottom: 50px;
+      position: relative;
+    }
+
+    .pricing-header::after {
+      content: '';
+      position: absolute;
+      bottom: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 4px;
+      background: linear-gradient(90deg, #A2195E, #7B1347);
+      border-radius: 2px;
+    }
+
+    .pricing-title {
+      font-family: Fontspring Demo Integralcf, Impact, sans-serif;
+      background: linear-gradient(135deg, #A2195E, #7B1347);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-size: 42px;
+      font-weight: 700;
+      margin-bottom: 15px;
+      letter-spacing: -0.5px;
+    }
+
+    .country-toggle {
+      display: inline-flex;
+      background: rgba(162, 25, 94, 0.1);
+      padding: 5px;
+      border-radius: 15px;
+      gap: 5px;
+      margin-bottom: 40px;
+    }
+
+    .country-btn {
+      background: none;
+      border: none;
+      color: #A2195E;
+      padding: 12px 30px;
+      border-radius: 12px;
+      font-family: Fontspring Demo Integralcf, Impact, sans-serif;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .country-btn.active {
+      background: #A2195E;
+      color: white;
+      box-shadow: 0 4px 15px rgba(162, 25, 94, 0.3);
+    }
+
+    .country-btn:not(.active):hover {
+      background: rgba(162, 25, 94, 0.1);
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      margin-top: 30px;
+      perspective: 1000px;
+    }
+
+    .pricing-card {
+      background: white;
+      border-radius: 25px;
+      padding: 40px;
+      text-align: center;
+      border: 1px solid rgba(162, 25, 94, 0.1);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    }
+
+    .pricing-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: linear-gradient(90deg, #A2195E, #7B1347);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .pricing-card:hover {
+      transform: translateY(-10px) rotateX(5deg);
+      box-shadow: 0 20px 40px rgba(162, 25, 94, 0.1);
+    }
+
+    .pricing-card:hover::before {
+      opacity: 1;
+    }
+
+    .pricing-card.popular {
+      border: 2px solid #A2195E;
+      transform: scale(1.05);
+      z-index: 1;
+      box-shadow: 0 20px 40px rgba(162, 25, 94, 0.15);
+    }
+
+    .pricing-card.popular:hover {
+      transform: scale(1.05) translateY(-10px) rotateX(5deg);
+    }
+
+    .popular-badge {
+      position: absolute;
+      top: 20px;
+      right: -35px;
+      background: linear-gradient(135deg, #A2195E, #7B1347);
+      color: white;
+      padding: 8px 40px;
+      font-size: 12px;
+      font-weight: bold;
+      transform: rotate(45deg);
+      box-shadow: 0 2px 10px rgba(162, 25, 94, 0.3);
+    }
+
+    .plan-name {
+      font-family: Fontspring Demo Integralcf, Impact, sans-serif;
+      font-size: 28px;
+      color: #A2195E;
+      margin-bottom: 15px;
+      position: relative;
+      display: inline-block;
+    }
+
+    .plan-price {
+      font-size: 48px;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 30px;
+      position: relative;
+      display: inline-flex;
+      align-items: start;
+      justify-content: center;
+    }
+
+    .plan-price .currency {
+      font-size: 24px;
+      margin-right: 5px;
+      margin-top: 5px;
+      color: #666;
+    }
+
+    .plan-price .period {
+      font-size: 16px;
+      color: #666;
+      margin-left: 5px;
+      margin-top: 5px;
+    }
+
+    .plan-features {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 30px;
+      text-align: left;
+      position: relative;
+    }
+
+    .plan-features li {
+      padding: 12px 0;
+      color: #555;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 15px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .plan-features li:last-child {
+      border-bottom: none;
+    }
+
+    .plan-features li::before {
+      content: "✓";
+      color: white;
+      font-weight: bold;
+      background: #A2195E;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      flex-shrink: 0;
+    }
+
+    .plan-button {
+      background: linear-gradient(135deg, #A2195E, #7B1347);
+      color: white;
+      border: none;
+      border-radius: 15px;
+      padding: 15px 30px;
+      font-family: Fontspring Demo Integralcf, Impact, sans-serif;
+      font-size: 16px;
+      cursor: pointer;
+      width: 100%;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .plan-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: all 0.5s ease;
+    }
+
+    .plan-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(162, 25, 94, 0.3);
+    }
+
+    .plan-button:hover::before {
+      left: 100%;
+    }
+
+    @media (max-width: 1024px) {
+      .pricing-grid {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+      }
+
+      .pricing-card.popular {
+        transform: scale(1);
+      }
+
+      .pricing-card.popular:hover {
+        transform: translateY(-10px) rotateX(5deg);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .pricing-content {
+        padding: 30px;
+      }
+      
+      .pricing-title {
+        font-size: 32px;
+      }
+
+      .country-btn {
+        padding: 10px 20px;
+      }
+    }
   </style>
 </head>
 <script>
@@ -101,7 +577,7 @@
                     <nav role="navigation" class="nav-menu w-nav-menu">
                       <a href="about-us.html" class="nav-link w-nav-link">about us</a>
                       <a href="blogs.html" class="nav-link w-nav-link">Blogs</a>
-                      <a href="how-it-works.html" class="nav-link w-nav-link">How it works</a>
+                      <a href="howitworks.html" class="nav-link w-nav-link">How it works</a>
                      
                       <a href="contact-us.html" class="nav-link w-nav-link">Contact Us</a>
                       
@@ -126,7 +602,7 @@
                   <nav role="navigation" class="nav-menu-2 w-nav-menu">
                     <a href="blogs.html" class="nav-link-2 w-nav-link">blogs</a>
                     <a href="about-us.html" class="nav-link-3 w-nav-link">About us</a>
-                    <a href="how-it-works.html" class="nav-link-3 w-nav-link">how it works</a>
+                    <a href="howitworks.html" class="nav-link-3 w-nav-link">how it works</a>
                    
                     <div class="barcode-wrapper">
                       <div class="qr-wrapper">
@@ -183,17 +659,17 @@
           <div data-w-id="aa5e7f58-5eee-2e09-1723-7daf16fca947" class="_1920-1 lk"><img src="images/list-icon.svg" loading="lazy" alt="" class="feature-logo">
             <h1 class="feature-head">Credmate score</h1>
             <p class="sub-head _2nd">Understand your <span class="text-span-5">creditworthiness</span> at a glance, updated every 24 hours to help you stay financially confident and make smarter borrowing and Lending decisions.</p>
-            <a href="how-it-works.html" class="button feature w-button">Learn More</a>
+            <a href="howitworks.html" class="button feature w-button">Learn More</a>
           </div>
           <div data-w-id="7b92dee9-a52e-7006-73d7-cee4be2fde61" class="_1920-2"><img src="images/security-icon.svg" loading="lazy" alt="" class="feature-logo">
             <h1 class="feature-head">proof of transaction </h1>
             <p class="sub-head _2nd">Whether you need a simple proof of transaction or a legally binding agreement, our contracts are designed to with recovery benefits included, we ensure peace of mind for lenders and transparency for borrower  at every step.</p>
-            <a href="how-it-works.html" class="button feature w-button">learn More</a>
+            <a href="howitworks.html" class="button feature w-button">learn More</a>
           </div>
           <div data-w-id="59cbdcb9-980c-96b6-2fc8-0842c17f0646" class="_1920-3 lk"><img src="images/recovery-icon.svg" loading="lazy" alt="" class="feature-logo">
             <h1 class="feature-head"> assistance Service </h1>
             <p class="sub-head _2nd">We act on your behalf to ensure timely payments. If the borrower defaults, we step in to provide seamless recovery support, just like a trusted financial institution</p>
-            <a href="how-it-works.html" class="button feature w-button">Learn More</a>
+            <a href="howitworks.html" class="button feature w-button">Learn More</a>
           </div>
         </div>
         <div class="hero-2nd">
@@ -342,24 +818,25 @@
             <h1 class="eliminated featured">Featured by top companies</h1>
           </div>
           <div class="logo-wrapper">
-            <a id="w-node-b76226bb-5dd0-f1d9-765f-58100da91c5f-57b47dbb" data-w-id="b76226bb-5dd0-f1d9-765f-58100da91c5f" href="#" class="logo-info w-inline-block"><img src="images/logo1.svg" loading="lazy" alt="" class="logo">
+            <a id="w-node-b76226bb-5dd0-f1d9-765f-58100da91c5f-57b47dbb" data-w-id="b76226bb-5dd0-f1d9-765f-58100da91c5f" href="#" class="logo-info w-inline-block"><img src="images/Logo_of_Shark_Tank_India (1).png" loading="lazy" alt="" class="logo">
               <div style="-webkit-transform:translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)" class="feature-para">
-                <p class="sub-head aboutus user">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.</p>
+                <p class="sub-head aboutus user">Featured on Shark Tank India Season 3, Credmate is revolutionizing informal lending by introducing a trust protocol platform designed to bridge the trust gap between lenders and borrowers. Credmate addresses the critical pain points in the informal credit ecosystem, making lending safer and more transparent for all parties involved</p>
               </div>
             </a>
-            <a id="w-node-f1e99ec6-85f6-040f-86ed-542bfb1a96c4-57b47dbb" data-w-id="f1e99ec6-85f6-040f-86ed-542bfb1a96c4" href="#" class="logo-info w-inline-block"><img src="images/logo2.svg" loading="lazy" alt="" class="logo">
+            <a id="w-node-f1e99ec6-85f6-040f-86ed-542bfb1a96c4-57b47dbb" data-w-id="f1e99ec6-85f6-040f-86ed-542bfb1a96c4" href="#" class="logo-info w-inline-block"><img src="images/avcmg1k82.jpg" loading="lazy" alt="" class="logo">
               <div class="feature-para ii">
-                <p class="sub-head aboutus user">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.</p>
+                <p class="sub-head aboutus user">Featured on Horse Stable Show by Bada Business, Credmate is transforming informal lending through its trust protocol platform, bridging gaps between lenders and borrowers. Credmate’s innovative approach impressed the panel, leading to a ₹1 crore offer, showcasing its potential to revolutionize financial inclusion with blockchain-powered solutions and AI-driven risk management.</p>
               </div>
             </a>
-            <a data-w-id="e2b8ecb9-b646-0eef-0d56-8ab4e0b6af91" href="#" class="logo-info w-inline-block"><img src="images/logo3.svg" loading="lazy" alt="" class="logo">
+            <a data-w-id="e2b8ecb9-b646-0eef-0d56-8ab4e0b6af91" href="#" class="logo-info w-inline-block"><img src="images/startup-canada-logo.jpg" loading="lazy" alt="" class="logo">
               <div class="feature-para iii">
-                <p class="sub-head aboutus user">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.</p>
+                <p class="sub-head aboutus user">
+                  Credmate is proud to be incubated in Startup Canada, leveraging their support to enhance our mission of fostering financial trust and innovation for a default-free Canada.</p>
               </div>
             </a>
-            <a data-w-id="47512658-08fd-71f0-ec9b-1fd78419dcc3" href="#" class="logo-info w-inline-block"><img src="images/logo4.svg" loading="lazy" alt="" class="logo">
+            <a data-w-id="47512658-08fd-71f0-ec9b-1fd78419dcc3" href="#" class="logo-info w-inline-block"><img src="images/startupindia (2).png" loading="lazy" alt="" class="logo">
               <div class="feature-para iv">
-                <p class="sub-head aboutus user">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.</p>
+                <p class="sub-head aboutus user">Credmate is officially recognized by Startup India, driving innovation and trust in the financial ecosystem while contributing to a stronger, default-free India.</p>
               </div>
             </a>
           </div>
@@ -401,11 +878,11 @@
               </div>
               <div data-hover="false" data-delay="0" data-w-id="0af27924-acb8-5e74-dc3c-e0dbe1636286" style="height:8vh" class="questuons w-dropdown">
                 <div class="question w-dropdown-toggle">
-                  <div class="heading-10">Can borrowers trust Credmate to support them during financial challenges?</div><img src="images/add-01.svg" loading="lazy" alt="">
+                  <div class="heading-10"> Is Credmate safe to use?</div><img src="images/add-01.svg" loading="lazy" alt="">
                 </div>
                 <nav class="dropdown-list w-dropdown-list">
                   <div class="answer">
-                    <p class="reviews-para">Yes, Credmate is committed to supporting borrowers who face genuine financial difficulties. If a borrower encounters challenges, we work with them to create fair and manageable repayment plans, ensuring that no borrower is left behind while maintaining the interests of the lender.</p>
+                    <p class="reviews-para">Yes, Credmate is built with advanced security features, including blockchain technology, to protect user data and transactions. Our platform is designed to be secure, transparent, and user-friendly.</p>
                   </div>
                 </nav>
               </div>
@@ -463,10 +940,10 @@
                 </div>
                 <div class="company-footer product">
                   <h1 class="footer-content head">PRODUCT</h1>
-                  <a href="how-it-works.html" class="link-block-3 w-inline-block">
+                  <a href="howitworks.html" class="link-block-3 w-inline-block">
                     <h1 class="footer-content">Pricing</h1>
                   </a>
-                  <a href="how-it-works.html" class="link-block-3 w-inline-block">
+                  <a href="howitworks.html" class="link-block-3 w-inline-block">
                     <h1 class="footer-content">How It Works</h1>
                   </a>
                   <a href="#reviews-section" class="link-block-3 w-inline-block">
@@ -484,10 +961,10 @@
                   <a href="mailto:support@credmate.ca" class="link-block-3 w-inline-block">
                     <h1 class="footer-content">Customer Support</h1>
                   </a>
-                  <a href="#" class="link-block-3 w-inline-block">
-                    <h1 class="footer-content">Privacy Policy</h1>
+                  <a href="terms-and-conditions.html" class="link-block-3 w-inline-block">
+                    <h1 class="footer-content">Terms &amp; Conditions</h1>
                   </a>
-                  <a href="#" class="link-block-3 w-inline-block">
+                  <a href="javascript:void(0)" class="link-block-3 w-inline-block" id="reportBugLink">
                     <h1 class="footer-content">Report a Bug</h1>
                   </a>
                 </div>
@@ -635,6 +1112,242 @@
       colorDark : "#000000",
       colorLight : "#ffffff",
       correctLevel : QRCode.CorrectLevel.H
+    });
+  </script>
+  <div class="bug-report-modal">
+    <div class="bug-report-content">
+      <button class="bug-report-close">&times;</button>
+      <div class="bug-report-header">
+        <div class="bug-report-icon">🐛</div>
+        <h2 class="bug-report-title">We're Sorry You Found a Bug</h2>
+        <p class="bug-report-subtitle">Thank you for being responsible and helping us improve. We're working hard to provide a seamless experience for all our users.</p>
+      </div>
+      <form class="bug-report-form" id="bugReportForm">
+        <div class="bug-report-field">
+          <label class="bug-report-label" for="bugDescription">Bug Description</label>
+          <textarea class="bug-report-input bug-report-textarea" id="bugDescription" required placeholder="Please describe what happened..."></textarea>
+        </div>
+        <div class="bug-report-field">
+          <label class="bug-report-label" for="bugEmail">Email <span class="optional-text">(optional - if you'd like updates about the bug)</span></label>
+          <input type="email" class="bug-report-input" id="bugEmail" placeholder="your@email.com">
+        </div>
+        <button type="submit" class="bug-report-submit">Submit Report</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Bug Report Modal Functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const reportBugLink = document.querySelector('#reportBugLink');
+      const modal = document.querySelector('.bug-report-modal');
+      const closeBtn = document.querySelector('.bug-report-close');
+      const form = document.getElementById('bugReportForm');
+
+      reportBugLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      });
+
+      closeBtn.addEventListener('click', function() {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+      });
+
+      modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+          modal.classList.remove('active');
+          document.body.style.overflow = '';
+        }
+      });
+
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const description = document.getElementById('bugDescription').value;
+        const email = document.getElementById('bugEmail').value;
+        
+        // Here you would typically send this data to your server
+        console.log('Bug Report:', { description, email });
+        
+        // Show success message
+        const formHTML = form.innerHTML;
+        form.innerHTML = `
+          <div style="text-align: center; padding: 20px;">
+            <div style="font-size: 48px; margin-bottom: 20px;">✅</div>
+            <h3 style="color: #A2195E; margin-bottom: 10px;">Thank You!</h3>
+            <p style="color: #666;">Your report has been submitted successfully. We'll look into it right away.</p>
+          </div>
+        `;
+        
+        // Close modal after 3 seconds
+        setTimeout(() => {
+          modal.classList.remove('active');
+          document.body.style.overflow = '';
+          // Reset form after modal is closed
+          setTimeout(() => {
+            form.innerHTML = formHTML;
+            form.reset();
+          }, 300);
+        }, 3000);
+      });
+    });
+  </script>
+  <div class="pricing-modal">
+    <div class="pricing-content">
+      <button class="pricing-close">&times;</button>
+      <div class="pricing-header">
+        <h2 class="pricing-title">Choose Your Perfect Plan</h2>
+        <div class="country-toggle">
+          <button class="country-btn active" data-country="india">India</button>
+          <button class="country-btn" data-country="canada">Canada</button>
+        </div>
+      </div>
+      <div class="pricing-grid" id="indiaPlans">
+        <div class="pricing-card">
+          <div class="plan-name">Pro Individual</div>
+          <div class="plan-price">
+            <span class="currency">₹</span>199
+            <span class="period">/year</span>
+          </div>
+          <ul class="plan-features">
+            <li>Daily credit monitoring</li>
+            <li>Real-time alerts</li>
+            <li>Credit score simulator</li>
+            <li>Identity theft protection</li>
+            <li>Premium support</li>
+          </ul>
+          <button class="plan-button">Choose Plan</button>
+        </div>
+        <div class="pricing-card popular">
+          <div class="popular-badge">Most Popular</div>
+          <div class="plan-name">Pro Business</div>
+          <div class="plan-price">
+            <span class="currency">₹</span>499
+            <span class="period">/year</span>
+          </div>
+          <ul class="plan-features">
+            <li>All Pro Individual features</li>
+            <li>Multiple user accounts</li>
+            <li>Business credit monitoring</li>
+            <li>Advanced reporting</li>
+            <li>Priority support</li>
+            <li>Custom dashboard</li>
+          </ul>
+          <button class="plan-button">Choose Plan</button>
+        </div>
+        <div class="pricing-card">
+          <div class="plan-name">Priority Business</div>
+          <div class="plan-price">
+            <span class="currency">₹</span>1,999
+            <span class="period">/year</span>
+          </div>
+          <ul class="plan-features">
+            <li>All Pro Business features</li>
+            <li>Dedicated account manager</li>
+            <li>Custom integration support</li>
+            <li>API access</li>
+            <li>24/7 premium support</li>
+            <li>Advanced analytics</li>
+          </ul>
+          <button class="plan-button">Choose Plan</button>
+        </div>
+      </div>
+      <div class="pricing-grid" id="canadaPlans" style="display: none;">
+        <div class="pricing-card">
+          <div class="plan-name">Pro Individual</div>
+          <div class="plan-price">
+            <span class="currency">$</span>199
+            <span class="period">/year</span>
+          </div>
+          <ul class="plan-features">
+            <li>Daily credit monitoring</li>
+            <li>Real-time alerts</li>
+            <li>Credit score simulator</li>
+            <li>Identity theft protection</li>
+            <li>Premium support</li>
+          </ul>
+          <button class="plan-button">Choose Plan</button>
+        </div>
+        <div class="pricing-card popular">
+          <div class="popular-badge">Most Popular</div>
+          <div class="plan-name">Pro Business</div>
+          <div class="plan-price">
+            <span class="currency">$</span>499
+            <span class="period">/year</span>
+          </div>
+          <ul class="plan-features">
+            <li>All Pro Individual features</li>
+            <li>Multiple user accounts</li>
+            <li>Business credit monitoring</li>
+            <li>Advanced reporting</li>
+            <li>Priority support</li>
+            <li>Custom dashboard</li>
+          </ul>
+          <button class="plan-button">Choose Plan</button>
+        </div>
+        <div class="pricing-card">
+          <div class="plan-name">Priority Business</div>
+          <div class="plan-price">
+            <span class="currency">$</span>1,999
+            <span class="period">/year</span>
+          </div>
+          <ul class="plan-features">
+            <li>All Pro Business features</li>
+            <li>Dedicated account manager</li>
+            <li>Custom integration support</li>
+            <li>API access</li>
+            <li>24/7 premium support</li>
+            <li>Advanced analytics</li>
+          </ul>
+          <button class="plan-button">Choose Plan</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Pricing Modal Functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const pricingLink = Array.from(document.querySelectorAll('.footer-content')).find(el => el.textContent === 'Pricing').parentElement;
+      const pricingModal = document.querySelector('.pricing-modal');
+      const pricingCloseBtn = document.querySelector('.pricing-close');
+      const countryBtns = document.querySelectorAll('.country-btn');
+      const indiaPlans = document.getElementById('indiaPlans');
+      const canadaPlans = document.getElementById('canadaPlans');
+
+      pricingLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        pricingModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      });
+
+      pricingCloseBtn.addEventListener('click', function() {
+        pricingModal.classList.remove('active');
+        document.body.style.overflow = '';
+      });
+
+      pricingModal.addEventListener('click', function(e) {
+        if (e.target === pricingModal) {
+          pricingModal.classList.remove('active');
+          document.body.style.overflow = '';
+        }
+      });
+
+      countryBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+          countryBtns.forEach(b => b.classList.remove('active'));
+          this.classList.add('active');
+          
+          if (this.dataset.country === 'india') {
+            indiaPlans.style.display = 'grid';
+            canadaPlans.style.display = 'none';
+          } else {
+            indiaPlans.style.display = 'none';
+            canadaPlans.style.display = 'grid';
+          }
+        });
+      });
     });
   </script>
 </body>
